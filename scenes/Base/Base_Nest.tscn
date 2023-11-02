@@ -1,0 +1,99 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://scripts1/Base/Base_Nest_Swarm.gd" type="Script" id=1]
+[ext_resource path="res://assets/space/Meteors/meteorBrown_tiny2.png" type="Texture" id=2]
+[ext_resource path="res://assets/space/Meteors/meteorBrown_small2.png" type="Texture" id=3]
+[ext_resource path="res://assets/space/Meteors/meteorBrown_med3.png" type="Texture" id=4]
+[ext_resource path="res://assets/space/Meteors/meteorBrown_big4.png" type="Texture" id=5]
+[ext_resource path="res://assets/misc/health_bar_red.png" type="Texture" id=6]
+[ext_resource path="res://assets/misc/health_bar_green.png" type="Texture" id=7]
+[ext_resource path="res://scenes/Base/Baase_Area2D.gd" type="Script" id=8]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 101.5, 82.5 )
+
+[node name="Base_Nest_Swarm" type="StaticBody2D" groups=["bases"]]
+script = ExtResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 90, 57 )
+texture = ExtResource( 2 )
+centered = false
+
+[node name="Sprite10" type="Sprite" parent="."]
+visible = false
+modulate = Color( 0.160784, 0.0196078, 0.164706, 1 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 5 )
+centered = false
+
+[node name="Sprite2" type="Sprite" parent="."]
+visible = false
+position = Vector2( 98, 67 )
+texture = ExtResource( 3 )
+
+[node name="Sprite3" type="Sprite" parent="."]
+visible = false
+position = Vector2( 97, 65 )
+texture = ExtResource( 4 )
+
+[node name="Sprite4" type="Sprite" parent="."]
+visible = false
+position = Vector2( 92, 66 )
+texture = ExtResource( 5 )
+
+[node name="Position2D" type="Position2D" parent="."]
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 15
+script = ExtResource( 8 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+visible = false
+position = Vector2( 100, 80 )
+shape = SubResource( 1 )
+
+[node name="Resource" type="Label" parent="."]
+margin_top = -29.0
+margin_right = 203.0
+margin_bottom = -8.0
+text = "0"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HP_bar" type="Label" parent="."]
+margin_left = 82.0
+margin_top = 169.0
+margin_right = 122.0
+margin_bottom = 183.0
+text = "0"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SpawnTimer" type="Timer" parent="."]
+
+[node name="LevelTimer" type="Timer" parent="."]
+
+[node name="DieTimer" type="Timer" parent="."]
+
+[node name="HP_bar2" type="TextureProgress" parent="."]
+margin_left = 28.0
+margin_top = 182.0
+margin_right = 182.0
+margin_bottom = 193.0
+value = 100.0
+texture_under = ExtResource( 6 )
+texture_progress = ExtResource( 7 )
+nine_patch_stretch = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="timeout" from="SpawnTimer" to="." method="_on_SpawnTimer_timeout"]
+[connection signal="timeout" from="LevelTimer" to="." method="_on_LevelTimer_timeout"]
+[connection signal="timeout" from="DieTimer" to="." method="_on_DieTimer_timeout"]

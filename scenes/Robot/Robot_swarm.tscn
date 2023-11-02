@@ -1,0 +1,84 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://assets/misc/health_bar_red.png" type="Texture" id=1]
+[ext_resource path="res://assets/misc/health_bar_green.png" type="Texture" id=2]
+[ext_resource path="res://scenes/Robot/Area2D.gd" type="Script" id=3]
+[ext_resource path="res://scripts1/Robot/Robot_swarm.gd" type="Script" id=4]
+[ext_resource path="res://assets/space/Enemies/enemyBlack5.png" type="Texture" id=5]
+[ext_resource path="res://scripts1/Robot/DamageNPC_robot_swarm.gd" type="Script" id=6]
+[ext_resource path="res://assets/space/Effects/shield3.png" type="Texture" id=7]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 46.5, 40.5 )
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 200.0
+
+[node name="Robot_Swarm" type="KinematicBody2D" groups=["robots"]]
+collision_layer = 2
+collision_mask = 13
+script = ExtResource( 4 )
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 5 )
+centered = false
+
+[node name="Pos" type="Position2D" parent="."]
+
+[node name="Area2D" type="Area2D" parent="." groups=["robots"]]
+collision_layer = 2
+collision_mask = 13
+script = ExtResource( 3 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2( 46, 40 )
+shape = SubResource( 1 )
+
+[node name="DieTimer" type="Timer" parent="."]
+
+[node name="Posit" type="Label" parent="."]
+margin_left = -11.0
+margin_top = -16.0
+margin_right = 85.0
+margin_bottom = -2.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HP_bar" type="Label" parent="."]
+margin_right = 40.0
+margin_bottom = 14.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HP_bar2" type="TextureProgress" parent="."]
+margin_left = -1.0
+margin_top = 86.0
+margin_right = 95.0
+margin_bottom = 91.0
+value = 100.0
+texture_under = ExtResource( 1 )
+texture_progress = ExtResource( 2 )
+nine_patch_stretch = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="DamageNPC" type="Area2D" parent="."]
+script = ExtResource( 6 )
+
+[node name="DamageSprite" type="Sprite" parent="DamageNPC"]
+visible = false
+position = Vector2( -25, -40 )
+texture = ExtResource( 7 )
+centered = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DamageNPC"]
+position = Vector2( 42, 38 )
+shape = SubResource( 2 )
+
+[node name="DamageTimer" type="Timer" parent="."]
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_Area2D_area_entered"]
+[connection signal="timeout" from="DieTimer" to="." method="_on_DieTimer_timeout"]

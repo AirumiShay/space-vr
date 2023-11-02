@@ -1,0 +1,73 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://assets/space/Enemies/enemyRed3.png" type="Texture" id=1]
+[ext_resource path="res://scripts1/Mobs/Creature.gd" type="Script" id=2]
+[ext_resource path="res://scenes/Mobs/Area2D.gd" type="Script" id=3]
+[ext_resource path="res://assets/misc/health_bar_green.png" type="Texture" id=4]
+[ext_resource path="res://assets/misc/health_bar_red.png" type="Texture" id=5]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 50, 42 )
+
+[node name="Creature" type="KinematicBody2D" groups=["creatures"]]
+collision_layer = 2
+collision_mask = 13
+script = ExtResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 1 )
+
+[node name="Pos" type="Position2D" parent="."]
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 13
+script = ExtResource( 3 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2( 0, -1 )
+shape = SubResource( 1 )
+
+[node name="DieTimer" type="Timer" parent="."]
+
+[node name="Posit" type="Label" parent="."]
+margin_left = -11.0
+margin_top = -16.0
+margin_right = 85.0
+margin_bottom = -2.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="FireTimer" type="Timer" parent="."]
+
+[node name="MyName" type="Label" parent="."]
+margin_left = -75.0
+margin_top = 62.0
+margin_right = 77.0
+margin_bottom = 76.0
+text = "Name"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HP_bar2" type="TextureProgress" parent="."]
+margin_left = -58.0
+margin_top = 48.0
+margin_right = 59.0
+margin_bottom = 55.0
+value = 100.0
+texture_under = ExtResource( 5 )
+texture_progress = ExtResource( 4 )
+nine_patch_stretch = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LifeTimer" type="Timer" parent="."]
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_Area2D_area_entered"]
+[connection signal="timeout" from="DieTimer" to="." method="_on_DieTimer_timeout"]
+[connection signal="timeout" from="FireTimer" to="." method="_on_FireTimer_timeout"]
+[connection signal="timeout" from="LifeTimer" to="." method="_on_LifeTimer_timeout"]

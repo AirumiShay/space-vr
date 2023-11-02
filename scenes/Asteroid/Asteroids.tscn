@@ -1,0 +1,67 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://assets/space/Meteors/meteorBrown_tiny2.png" type="Texture" id=1]
+[ext_resource path="res://scripts1/Asteroid/Asteroids.gd" type="Script" id=2]
+[ext_resource path="res://assets/space/Meteors/meteorBrown_small2.png" type="Texture" id=3]
+[ext_resource path="res://assets/space/Meteors/meteorBrown_med3.png" type="Texture" id=4]
+[ext_resource path="res://assets/space/Meteors/meteorBrown_big4.png" type="Texture" id=5]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 101.5, 82.5 )
+
+[node name="Asteroid" type="RigidBody2D" groups=["asteroids"]]
+script = ExtResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 90, 57 )
+texture = ExtResource( 1 )
+centered = false
+
+[node name="Sprite10" type="Sprite" parent="."]
+visible = false
+modulate = Color( 0.160784, 0.0196078, 0.164706, 1 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 5 )
+centered = false
+
+[node name="Sprite2" type="Sprite" parent="."]
+position = Vector2( 98, 67 )
+texture = ExtResource( 3 )
+
+[node name="Sprite3" type="Sprite" parent="."]
+position = Vector2( 97, 65 )
+texture = ExtResource( 4 )
+
+[node name="Sprite4" type="Sprite" parent="."]
+position = Vector2( 92, 66 )
+texture = ExtResource( 5 )
+
+[node name="Position2D" type="Position2D" parent="."]
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 9
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+visible = false
+position = Vector2( 100, 80 )
+shape = SubResource( 1 )
+
+[node name="Resource" type="Label" parent="."]
+margin_top = -29.0
+margin_right = 203.0
+margin_bottom = -8.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HP_bar" type="Label" parent="."]
+margin_left = 82.0
+margin_top = 169.0
+margin_right = 122.0
+margin_bottom = 183.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SpawnTimer" type="Timer" parent="."]
