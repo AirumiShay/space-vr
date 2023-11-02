@@ -1,8 +1,11 @@
-Game RTS,multiplayer,godot engine. Name: "Space VR: Civilization of Robots"
+Game RTS,multiplayer, is part of project "Worlds and Gods" from here:
+https://github.com/AirumiShay/worlds
+
+Name: "Space VR: Civilization of Robots"
 
 Licence GPL-3
 
-Name: "Space VR: Civilization of Robots" 
+
 
 Alfa-version 0.038 
 
